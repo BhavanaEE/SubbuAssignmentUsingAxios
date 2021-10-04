@@ -11,12 +11,11 @@ Given an API "https://dog.ceo/api/breeds/image/random". In this API we have 2 pr
 ```bash 
 $ npm install
 ```
+
+## FOR RUNNING TEST
 ```
-$ tsc --init
+$ tsc
 ```
 ```
-$ npm --init
-```
-```
-$ npm install axios
+$ npm run test
 ```
