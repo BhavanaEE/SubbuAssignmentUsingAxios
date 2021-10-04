@@ -1,5 +1,5 @@
 # PROBLEM CONTEXT
-Given an API "https://dog.ceo/api/breeds/image/random". In this API we have 2 properties message and success. We have to log the status from url.
+Given an API "https://dog.ceo/api/breeds/image/random". In this API we have 2 properties message and status. We have to log the status from url.
 
 ## SAMPLE OUTPUT FROM URL
 {
