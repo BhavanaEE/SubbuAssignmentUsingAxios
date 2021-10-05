@@ -19,7 +19,7 @@ test("When API call is successful and status is success",async () => {
 });
 
 
-test("When API call is successful and status is success",async () => {
+test("When API call is successful and status fails",async () => {
     mockedAxios.get.mockResolvedValue({
         data:{
             message:"Hello",
