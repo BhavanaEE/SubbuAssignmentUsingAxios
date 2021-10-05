@@ -8,9 +8,35 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const axios_1 = __importDefault(require("axios"));
 const app_1 = require("./app");
-test("it fetches an api and returns success", () => __awaiter(void 0, void 0, void 0, function* () {
-    const received = yield (0, app_1.getData)();
-    expect(received).toEqual("success");
+jest.mock('axios');
+const mockedAxios = axios_1.default; // type casting
+test("When API call is successful and status is success", () => __awaiter(void 0, void 0, void 0, function* () {
+    mockedAxios.get.mockResolvedValue({
+        data: {
+            message: "Hello",
+            status: "success"
+        }
+    });
+    let url = "https://dog.ceo/api/breeds/image/random";
+    let expected = true;
+    let statusFromUrl = yield (0, app_1.logStatusFromAPICall)(url);
+    expect(statusFromUrl).toBe(expected);
+}));
+test("When API call is successful and status is success", () => __awaiter(void 0, void 0, void 0, function* () {
+    mockedAxios.get.mockResolvedValue({
+        data: {
+            message: "Hello",
+            status: "error"
+        }
+    });
+    let url = "https://dog.ceo/api/breeds/image/random";
+    let expected = false;
+    let statusFromUrl = yield (0, app_1.logStatusFromAPICall)(url);
+    expect(statusFromUrl).toBe(expected);
 }));

@@ -12,15 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getData = void 0;
+exports.logStatusFromAPICall = void 0;
 const axios_1 = __importDefault(require("axios"));
-function getData() {
+function logStatusFromAPICall(url) {
     return __awaiter(this, void 0, void 0, function* () {
-        const resp = yield axios_1.default.get("https://dog.ceo/api/breeds/image/random");
-        const res = resp.toString();
-        //console.log(resp.data['status']);
-        return resp.data['status'];
+        const response = yield axios_1.default.get(url);
+        return response.data['status'] === "success";
     });
 }
-exports.getData = getData;
-getData();
+exports.logStatusFromAPICall = logStatusFromAPICall;

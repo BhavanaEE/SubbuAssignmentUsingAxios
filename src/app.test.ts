@@ -1,7 +1,33 @@
-import {getData} from "./app";
+import axios from "axios";
+import {logStatusFromAPICall} from "./app";
 
-test("it fetches an api and returns success",async ()=>{
-    const received= await getData();
-    const expected="success";
-    expect(received).toEqual(expected);
-})
+jest.mock('axios'); 
+
+const mockedAxios = axios as jest.Mocked<typeof axios>; // type casting
+
+test("When API call is successful and status is success",async () => {
+    mockedAxios.get.mockResolvedValue({
+        data:{
+            message:"Hello",
+            status:"success"
+        }
+    }); 
+    let url="https://dog.ceo/api/breeds/image/random"
+    let expected=true;
+    let statusFromUrl = await logStatusFromAPICall(url);
+    expect(statusFromUrl).toBe(expected);
+});
+
+
+test("When API call is successful and status is success",async () => {
+    mockedAxios.get.mockResolvedValue({
+        data:{
+            message:"Hello",
+            status:"error"
+        }
+    }); 
+    let url="https://dog.ceo/api/breeds/image/random"
+    let expected=false;
+    let statusFromUrl = await logStatusFromAPICall(url);
+    expect(statusFromUrl).toBe(expected);
+});
